@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
-import { getProducts, getProductsByCategory } from "../asyncMock"
 import ItemList from "../ItemList/ItemList"
 import { useParams } from "react-router-dom"
+import { getProducts } from "../../services/firebase/firestore/products"
 
 const ItemlistContainer = ({greeting}) => {
     const [products, setProducts]=useState([])
@@ -9,7 +9,7 @@ const ItemlistContainer = ({greeting}) => {
     const {categoryId} = useParams()
 
     useEffect(()=>{
-        const asyncFunction = categoryId ? getProductsByCategory : getProducts
+        const asyncFunction = getProducts
 
         asyncFunction(categoryId)
         .then(Response=>{
